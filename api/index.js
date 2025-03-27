@@ -61,10 +61,12 @@ res.send('homepage is up and running')
         })
   })
   
-// app.put('/', (req, res) => {
-//     res.send('PUT request to homepage')
-//   })
-
-// app.delete('/', (req, res) => {
-//     res.send('DELETE request to homepage')
-//   })
+  app.delete('/titles/:id', (req, res) => {
+    const {id} = req.params;
+    knex('titles')
+        .where({id})
+        .del()
+        .then(function() {
+            res.json({success: true, message: 'ok'})
+        })
+  })
